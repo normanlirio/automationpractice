@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="C:/Users/Normz/Documents/automation/automation-java-seleniium/java-selenium/src/test/java"
+          preserve-order="true" verbose="2">
+        <classes>
+            <class name="specs.e2e.CheckoutSpec">
+                <methods>
+                    <include name="performLogin"/>
+                    <include name="performAddToCart"/>
+                    <include name="performPlaceOrder"/>
+                    <include name="performPayment"/>
+                </methods>
+            </class>
+            <class name="specs.e2e.LoginSpec">
+                <methods>
+                    <include name="performLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

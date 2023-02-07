@@ -4,7 +4,7 @@ import Interface.BaseInterface;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import util.BySelector;
+import util.ByPageSelector;
 
 public class BasePage implements BaseInterface {
 
@@ -21,9 +21,9 @@ public class BasePage implements BaseInterface {
     }
 
     @Override
-    public By findCustomElement(String element, BySelector bySelector) {
-        return switch (bySelector) {
-            case CLASSNAME ->By.className(element);
+    public By findCustomElement(String element, ByPageSelector byPageSelector) {
+        return switch (byPageSelector) {
+            case CLASSNAME -> By.className(element);
             case ID -> By.id(element);
             default -> By.cssSelector(element);
         };

@@ -3,7 +3,7 @@ package PageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import util.BySelector;
+import util.ByPageSelector;
 
 public class CartPage extends BasePage {
 
@@ -20,8 +20,8 @@ public class CartPage extends BasePage {
         return findElement(button_proceed_to_checkout);
     }
 
-    public WebElement getCustomElement(String element, BySelector bySelector) {
-        return findElement(findCustomElement(element, bySelector));
+    public WebElement getCustomElement(String element, ByPageSelector byPageSelector) {
+        return findElement(findCustomElement(element, byPageSelector));
     }
     public WebElement getList_item_active() {
         return findElement(list_item_active);

@@ -1,5 +1,5 @@
 package util;
 
-public enum BySelector {
+public enum ByPageSelector {
     CSS, ID, TAG, CLASSNAME, LINKTEXT
 }

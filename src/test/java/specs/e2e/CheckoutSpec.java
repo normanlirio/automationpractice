@@ -1,16 +1,14 @@
 package specs.e2e;
 
-import Actions.SimpleActions;
 import PageObjects.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import specs.BaseSpec;
 import util.Drivers;
@@ -18,7 +16,8 @@ import util.TestData;
 
 import java.time.Duration;
 
-public class ProductsSpec extends BaseSpec {
+@Test(description = "End to end test for checkout")
+public class CheckoutSpec extends BaseSpec {
 
     private CartPage cartPage;
     private CheckoutPage checkoutPage;
@@ -29,18 +28,18 @@ public class ProductsSpec extends BaseSpec {
     private TopMenuBar topMenuBar;
     private WebDriver creativeDriver;
 
-    @BeforeTest
+    public CheckoutSpec() {
+        super(Drivers.CHROME);
+    }
+
+   @BeforeClass
     public void initialize() {
-        webDriver = initWebDriver(Drivers.CHROME);
-        initializeWait();
-        actions = new Actions(webDriver);
         cartPage = new CartPage(webDriver);
         checkoutPage = new CheckoutPage(webDriver);
         loginPage = new LoginPage(webDriver);
         paymentPage = new PaymentPage(webDriver);
         paymentDonePage = new PaymentDonePage(webDriver);
         productsPage = new ProductsPage(webDriver);
-        simpleActions = new SimpleActions();
         topMenuBar = new TopMenuBar(webDriver);
     }
 
@@ -49,8 +48,8 @@ public class ProductsSpec extends BaseSpec {
         loginPage.visit(TestData.LOGIN_URL);
         Assert.assertEquals(simpleActions.isVisible(loginPage.getForm_login()), true);
 
-        simpleActions.type(loginPage.getInput_login_email(), "");
-        simpleActions.type(loginPage.getInput_login_password(), "");
+        simpleActions.type(loginPage.getInput_login_email(), testProperties.getProperty("login.email"));
+        simpleActions.type(loginPage.getInput_login_password(), testProperties.getProperty("login.password"));
         simpleActions.click(loginPage.getButton_login_submit());
 
         Assert.assertTrue(simpleActions.isVisible(topMenuBar.getAnchor_logout()));

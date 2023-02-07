@@ -29,17 +29,4 @@ public class SimpleActions {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void clickWithRetry(WebElement element, WebDriverWait wait) {
-        ExpectedCondition<Boolean> elementIsClickable = argument -> {
-            try {
-                element.click();
-                return true;
-            } catch (ElementClickInterceptedException | TimeoutException elementClickInterceptedException) {
-                return false;
-            }
-        };
-        wait.until(elementIsClickable);
-
-    }
-
 }
