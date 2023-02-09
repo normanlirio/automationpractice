@@ -48,8 +48,8 @@ public class CheckoutSpec extends BaseSpec {
         loginPage.visit(TestData.LOGIN_URL);
         Assert.assertEquals(simpleActions.isVisible(loginPage.getForm_login()), true);
 
-        simpleActions.type(loginPage.getInput_login_email(), testProperties.getProperty("login.email"));
-        simpleActions.type(loginPage.getInput_login_password(), testProperties.getProperty("login.password"));
+        simpleActions.type(loginPage.getInput_login_email(), System.getProperty("testUsername"));
+        simpleActions.type(loginPage.getInput_login_password(),  System.getProperty("testPassword"));
         simpleActions.click(loginPage.getButton_login_submit());
 
         Assert.assertTrue(simpleActions.isVisible(topMenuBar.getAnchor_logout()));

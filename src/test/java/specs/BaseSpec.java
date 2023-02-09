@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import util.Drivers;
 import util.PropertiesHelper;
@@ -44,6 +45,8 @@ public class BaseSpec {
             default -> webDriver = new ChromeDriver();
         }
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+
     }
 
     @BeforeTest
@@ -53,6 +56,11 @@ public class BaseSpec {
         simpleActions = new SimpleActions();
         actions = new Actions(webDriver);
         testProperties = new PropertiesHelper().loadProperties();
+    }
+
+    @AfterTest
+    public void tearDown() {
+        webDriver.close();
     }
 
 

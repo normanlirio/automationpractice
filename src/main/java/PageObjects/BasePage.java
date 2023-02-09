@@ -1,26 +1,27 @@
 package PageObjects;
 
-import Interface.BaseInterface;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import util.ByPageSelector;
+import util.PropertiesHelper;
 
-public class BasePage implements BaseInterface {
+import java.util.Properties;
 
+public class BasePage {
+
+    private Properties properties;
     public WebDriver webDriver;
 
-    //TODO: set BASE URL to env variables
     public BasePage(WebDriver driver) {
         this.webDriver = driver;
+        properties = new PropertiesHelper().loadProperties();
     }
 
     public void visit(String url) {
-        String BASE_URL = "https://automationexercise.com/";
-        this.webDriver.get(BASE_URL + url);
+        this.webDriver.get(properties.getProperty("base.url") + url);
     }
 
-    @Override
     public By findCustomElement(String element, ByPageSelector byPageSelector) {
         return switch (byPageSelector) {
             case CLASSNAME -> By.className(element);
@@ -29,7 +30,6 @@ public class BasePage implements BaseInterface {
         };
     }
 
-    @Override
     public WebElement findElement(By element) {
         return webDriver.findElement(element);
     }

@@ -20,6 +20,6 @@ public class TestData {
     //URLs
     public static String HOME_URL = "";
     public static String LOGIN_URL = "login";
-    public static String RESOURCES = "src/main/resources/env.properties";
+    public static String RESOURCES = "env.dev.properties";
 
 }

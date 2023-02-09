@@ -11,7 +11,7 @@ public class PropertiesHelper {
 
     public Properties loadProperties() {
         try {
-            fileInputStream = new FileInputStream(TestData.RESOURCES);
+            fileInputStream = new FileInputStream(System.getProperty("env.variable"));
             properties = new Properties();
             properties.load(fileInputStream);
 

@@ -10,8 +10,8 @@
 
     <properties>
         <java.version>19</java.version>
-        <maven.compiler.source>1.9</maven.compiler.source>
-        <maven.compiler.target>1.9</maven.compiler.target>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -50,14 +50,22 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M8</version>
                 <configuration>
+                    <systemPropertyVariables>
+                        <userEmail>${testUsername}</userEmail>
+                        <userPassword>${testUserPassword}</userPassword>
+                        <env.variable>${testEnvVariables}</env.variable>
+                    </systemPropertyVariables>
                     <suiteXmlFiles>
-                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                        <suiteXmlFile>${loginSpec}</suiteXmlFile>
+                        <suiteXmlFile>${checkoutSpec}</suiteXmlFile>
                     </suiteXmlFiles>
+
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.10.1</version>
                 <configuration>
                     <source>19</source>
                     <target>19</target>
