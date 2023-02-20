@@ -18,7 +18,7 @@ jobs:
           java-version: 19
           
       - name: Step 3 - Install dependencies
-        run: mvn clean install -e -X
+        run: mvn dependency:resolve
         
       - name: Step 4 - Build Test
         run: mvn --file pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='$TEST_EMAIL' -DtestPassword='$TEST_PW' -DloginSpec='test-suite/login_spec.xml' -DcheckoutSpec='test-suite/checkout_spec.xml' clean test
