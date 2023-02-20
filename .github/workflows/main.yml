@@ -25,12 +25,10 @@ jobs:
         with:
           java-version: 19
       - name: Step 4 - Build Test
-        run: mvn -f pom.xml $GITHUB_WORKSPACE/.github/workflows/maven-settings.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='$TEST_EMAIL' -DtestPassword='$TEST_PW' -DloginSpec='test-suite/login_spec.xml' -DcheckoutSpec='test-suite/checkout_spec.xml' clean test
+        run: mvn -f pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='$TEST_EMAIL' -DtestPassword='$TEST_PW' -DloginSpec='test-suite/login_spec.xml' -DcheckoutSpec='test-suite/checkout_spec.xml' clean test
         env:
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
           TEST_PW: $ {{ secrets.TEST_PW }}
-          PAT_EMAIL: ${{ secrets.USER_NAME }}
-          PAT_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           
       - name: Step 5 - List the current directory
         run: ls- a
