@@ -12,14 +12,17 @@ jobs:
       - name: Step 1 - Checkout main branch from GitHub
         uses: actions/checkout@v2
         
-      - name: Step 2 - Set up JDK 19
+      - name: Step 2 - Install chromedriver
+        uses: nanasess/setup-chromedriver@v1
+        
+      - name: Step 3 - Set up JDK 19
         uses: actions/setup-java@v1
         with:
           java-version: 19
-      - name: Step 3 - Build Test
+      - name: Step 4 - Build Test
         run: mvn -f pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='$TEST_EMAIL' -DtestPassword='$TEST_PW' -DloginSpec='test-suite/login_spec.xml' -DcheckoutSpec='test-suite/checkout_spec.xml' clean test
         env:
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
           TEST_PW: $ {{ secrets.TEST_PW }}
-      - name: Step 4 - List the current directory
+      - name: Step 5 - List the current directory
         run: ls- a
