@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import specs.BaseSpec;
-import util.Drivers;
 import util.TestData;
 
 @Test(description = "End to end test for Login")
@@ -14,10 +13,6 @@ public class LoginSpec extends BaseSpec {
 
     private LoginPage loginPage;
     private TopMenuBar topMenuBar;
-
-    public LoginSpec() {
-        super(Drivers.CHROME);
-    }
 
     @BeforeClass
     public void initialize() {
@@ -37,6 +32,5 @@ public class LoginSpec extends BaseSpec {
         Assert.assertTrue(simpleActions.isVisible(topMenuBar.getAnchor_logout()));
 
     }
-
 
 }

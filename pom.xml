@@ -53,11 +53,11 @@
                     <systemPropertyVariables>
                         <userEmail>${testUsername}</userEmail>
                         <userPassword>${testUserPassword}</userPassword>
+                        <webDriver>${webDriver}</webDriver>
                         <env.variable>${testEnvVariables}</env.variable>
                     </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>${loginSpec}</suiteXmlFile>
-                        <suiteXmlFile>${checkoutSpec}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

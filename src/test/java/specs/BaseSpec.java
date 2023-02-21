@@ -6,8 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import util.Drivers;
 import util.PropertiesHelper;
 
@@ -25,8 +25,28 @@ public class BaseSpec {
     public WebDriverWait wait;
     public SimpleActions simpleActions;
 
-    public BaseSpec(Drivers drivers) {
-        this.drivers = drivers;
+
+
+
+    @BeforeClass
+    public void setUp() {
+        testProperties = new PropertiesHelper().loadProperties();
+        setUpWebDriver();
+        initializeWait();
+        simpleActions = new SimpleActions();
+        actions = new Actions(webDriver);
+
+    }
+    public void setUpWebDriver() {
+        System.out.println("Setting up webdriver..." + System.getProperty("webDriver"));
+        if (testProperties.getProperty("driver").equals("firefox")) {
+            webDriver = new FirefoxDriver();
+        } else {
+            webDriver = new ChromeDriver();
+
+        }
+        System.out.println("CHROME: " + webDriver);
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     private WebDriverWait initializeWait() {
@@ -39,29 +59,8 @@ public class BaseSpec {
         return wait;
     }
 
-    private void setUpWebDriver() {
-        switch (this.drivers) {
-            case FIREFOX -> webDriver = new FirefoxDriver();
-            default -> webDriver = new ChromeDriver();
-        }
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-
-    }
-
-    @BeforeTest
-    public void setUp() {
-        setUpWebDriver();
-        initializeWait();
-        simpleActions = new SimpleActions();
-        actions = new Actions(webDriver);
-        testProperties = new PropertiesHelper().loadProperties();
-    }
-
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         webDriver.close();
     }
-
-
 }

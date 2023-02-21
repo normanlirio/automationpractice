@@ -7,11 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import specs.BaseSpec;
-import util.Drivers;
 import util.TestData;
 
 import java.time.Duration;
@@ -27,10 +25,6 @@ public class CheckoutSpec extends BaseSpec {
     private ProductsPage productsPage;
     private TopMenuBar topMenuBar;
     private WebDriver creativeDriver;
-
-    public CheckoutSpec() {
-        super(Drivers.CHROME);
-    }
 
    @BeforeClass
     public void initialize() {
@@ -126,10 +120,4 @@ public class CheckoutSpec extends BaseSpec {
 
        Assert.assertEquals(webDriver.getCurrentUrl(), TestData.BASE_URL);
     }
-
-    @AfterTest
-    public void tearDown() {
-          webDriver.close();
-    }
-
 }

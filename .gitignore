@@ -5,5 +5,5 @@ package-lock.json
 node_modules
 .idea\
 java-selenium-automation-practice.iml
-target/.idea\
-target\
+target/.idea/
+
