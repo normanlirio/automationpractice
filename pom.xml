@@ -59,14 +59,7 @@
                         <suiteXmlFile>${loginSpec}</suiteXmlFile>
                         <suiteXmlFile>${checkoutSpec}</suiteXmlFile>
                     </suiteXmlFiles>
-
                 </configuration>
-                <execution>
-                <id>default-test</id>
-                   <configuration>
-                        <skip>true</skip>
-                   </configuration>
-            </execution>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
