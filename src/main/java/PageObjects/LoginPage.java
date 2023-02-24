@@ -18,9 +18,7 @@ public class LoginPage extends BasePage {
     public WebElement getButton_login_submit() {
         return webDriver.findElement(button_login_submit);
     }
-    public WebElement getInput_login_email() {
-        return webDriver.findElement(input_login_email);
-    }
+    public WebElement getInput_login_email() { return webDriver.findElement(input_login_email); }
     public WebElement getInput_login_password() { return webDriver.findElement(input_login_password); }
     public WebElement getForm_login() { return webDriver.findElement(form_login); }
 

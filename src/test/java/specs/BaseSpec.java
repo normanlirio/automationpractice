@@ -7,13 +7,12 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeSuite;
 import util.Drivers;
 import util.PropertiesHelper;
 
 import java.time.Duration;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class BaseSpec {
 
@@ -25,10 +24,7 @@ public class BaseSpec {
     public WebDriverWait wait;
     public SimpleActions simpleActions;
 
-
-
-
-    @BeforeClass
+    @BeforeSuite
     public void setUp() {
         testProperties = new PropertiesHelper().loadProperties();
         setUpWebDriver();
@@ -37,21 +33,18 @@ public class BaseSpec {
         actions = new Actions(webDriver);
 
     }
-    public void setUpWebDriver() {
-        System.out.println("Setting up webdriver..." + System.getProperty("webDriver"));
+    private void setUpWebDriver() {
         if (testProperties.getProperty("driver").equals("firefox")) {
             webDriver = new FirefoxDriver();
         } else {
             webDriver = new ChromeDriver();
-
         }
-        System.out.println("CHROME: " + webDriver);
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
     }
 
     private WebDriverWait initializeWait() {
         try {
-            wait = new WebDriverWait(webDriver, Duration.ofMillis(3000L));
+            wait = new WebDriverWait(webDriver, Duration.ofMillis(2000L));
         } catch (NullPointerException e) {
             e.getLocalizedMessage();
             System.out.println("WebDriver not initialized: " + e.getLocalizedMessage());

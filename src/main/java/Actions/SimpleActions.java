@@ -23,7 +23,7 @@ public class SimpleActions {
     }
 
     public void waitForElement(WebDriverWait wait, WebElement element) {
-        wait.until(ExpectedConditions.elementToBeClickable(element));
+        wait.until(ExpectedConditions.visibilityOfAllElements(element));
     }
 
 }
