@@ -53,8 +53,5 @@ public class BaseSpec {
     }
 
     @AfterClass
-    public void tearDown() {
-
-        //webDriver.close();
-    }
+    public void tearDown() { webDriver.close(); }
 }

@@ -1,19 +1,13 @@
 package specs.e2e;
 
 import PageObjects.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchFrameException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import specs.BaseSpec;
 import util.TestData;
-
-import java.time.Duration;
 
 @Test(description = "End to end test for checkout")
 public class CheckoutSpec extends BaseSpec {
@@ -26,7 +20,6 @@ public class CheckoutSpec extends BaseSpec {
     private PaymentDonePage paymentDonePage;
     private ProductsPage productsPage;
     private TopMenuBar topMenuBar;
-    private WebDriver creativeDriver;
 
    @BeforeTest
     public void initialize() {
@@ -76,10 +69,16 @@ public class CheckoutSpec extends BaseSpec {
 
             Assert.assertTrue(simpleActions.isVisible(checkoutPage.getHeader_page_subheading()));
             simpleActions.type(checkoutPage.getTextarea_comment(), TestData.TEXT_COMMENT);
-            simpleActions.waitForElement(wait, checkoutPage.getAnchor_place_order());
+
+            //Click Place order button to trigger ads
             simpleActions.click(checkoutPage.getAnchor_place_order());
 
-            //Assert.assertTrue(simpleActions.isVisible(paymentPage.getHeader_payment()));
+            hideAllAds();
+
+            //Click button to to proceed to next step
+            simpleActions.click(checkoutPage.getAnchor_place_order());
+
+            Assert.assertTrue(simpleActions.isVisible(paymentPage.getButton_payment_button()));
 
         } else cartPage.visit(TestData.HOME_URL);
 
@@ -88,24 +87,7 @@ public class CheckoutSpec extends BaseSpec {
     @Test(priority = 3)
     public void performPayment() {
         System.out.println("performPayment");
-        Assert.assertTrue(simpleActions.isVisible(paymentPage.getBody()));
-        findWhichAswiftFrame();
-        WebElement dismissButton;
-        if(adDriver.findElements(By.id(TestData.DISMISS_BUTTON)).size() > 0) {
-            dismissButton = adDriver.findElement(By.id(TestData.DISMISS_BUTTON));
-        } else {
-            findAdIframeHost();
-            dismissButton = creativeDriver.findElement(By.id(TestData.DISMISS_BUTTON));
-        }
-
-        dismissButton.click();
-        WebDriverWait creativeDriverWait = new WebDriverWait(creativeDriver, Duration.ofMillis(3000L));
-        try {
-            creativeDriverWait.until(ExpectedConditions.invisibilityOfElementLocated(By.id(TestData.DISMISS_BUTTON)));
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-        }
-        Assert.assertTrue(simpleActions.isVisible(paymentPage.getHeader_payment()));
+        Assert.assertTrue(simpleActions.isVisible(paymentPage.getButton_payment_button()));
 
         simpleActions.type(paymentPage.getInput_name_of_card(), TestData.NAME_ON_CARD);
         simpleActions.type(paymentPage.getInput_card_number(), TestData.CARD_NUMBER);
@@ -118,37 +100,14 @@ public class CheckoutSpec extends BaseSpec {
 
         simpleActions.click(paymentDonePage.getButton_continue());
 
-       Assert.assertEquals(webDriver.getCurrentUrl(), TestData.BASE_URL);
+
+        Assert.assertEquals(simpleActions.isVisible(productsPage.getDiv_products().get(0)), true);
     }
 
-
-    private void findWhichAswiftFrame() {
-        Boolean aSwift;
-        int aswiftCount = 1;
-        do {
-            aSwift = findAdHostFrame(aswiftCount);
-            System.out.println("Find which frame: " + aSwift);
-            aswiftCount++;
-        } while(!aSwift);
-        System.out.println("Current Aswift: " + aswiftCount);
-    }
-
-
-    private Boolean findAdHostFrame(int frame) {
-        try {
-            adDriver = webDriver.switchTo().frame("aswift_1");
-            return true;
-        } catch (NoSuchFrameException noSuchFrameException) {
-            adDriver = webDriver.switchTo().frame("aswift_" + frame);
-            return false;
-        }
-    }
-
-    private void findAdIframeHost() {
-        try {
-            creativeDriver = adDriver.switchTo().frame("ad_iframe");
-        } catch (NoSuchFrameException noSuchFrameException) {
-            findWhichAswiftFrame();
+    private void hideAllAds() {
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        for(int count = 0; count < paymentPage.getIframe_host().size(); count++) {
+            js.executeScript("document.getElementsByTagName('ins')["+ count +"].style.display='none';");
         }
     }
 }
