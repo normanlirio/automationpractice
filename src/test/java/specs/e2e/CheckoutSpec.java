@@ -88,12 +88,12 @@ public class CheckoutSpec extends BaseSpec {
     public void performPayment() {
         System.out.println("performPayment");
         Assert.assertTrue(simpleActions.isVisible(paymentPage.getBody()));
-        findWhich();
+        findWhichAswiftFrame();
         WebElement dismissButton;
         if(adDriver.findElements(By.id(TestData.DISMISS_BUTTON)).size() > 0) {
             dismissButton = adDriver.findElement(By.id(TestData.DISMISS_BUTTON));
         } else {
-            creativeDriver = adDriver.switchTo().frame("ad_iframe");
+            findAdIframeHost();
             dismissButton = creativeDriver.findElement(By.id(TestData.DISMISS_BUTTON));
         }
 
@@ -121,11 +121,12 @@ public class CheckoutSpec extends BaseSpec {
     }
 
 
-    private void findWhich() {
+    private void findWhichAswiftFrame() {
         Boolean aSwift;
         int aswiftCount = 1;
         do {
             aSwift = findAdHostFrame(aswiftCount);
+            System.out.println("Find which frame: " + aSwift);
             aswiftCount++;
         } while(!aSwift);
         System.out.println("Current Aswift: " + aswiftCount);
@@ -142,4 +143,11 @@ public class CheckoutSpec extends BaseSpec {
         }
     }
 
+    private void findAdIframeHost() {
+        try {
+            creativeDriver = adDriver.switchTo().frame("ad_iframe");
+        } catch (NoSuchFrameException noSuchFrameException) {
+            findWhichAswiftFrame();
+        }
+    }
 }
