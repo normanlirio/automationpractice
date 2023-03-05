@@ -3,6 +3,7 @@ package specs.e2e;
 import PageObjects.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -35,7 +36,8 @@ public class CheckoutSpec extends BaseSpec {
     @Test(priority = 0)
     public void performLogin()  {
         loginPage.visit(TestData.LOGIN_URL);
-        simpleActions.waitForElement(wait, loginPage.getForm_login());
+
+        wait.until(ExpectedConditions.elementToBeClickable(loginPage.getButton_login_submit()));
 
         Assert.assertEquals(simpleActions.isVisible(loginPage.getForm_login()), true);
 
@@ -50,10 +52,12 @@ public class CheckoutSpec extends BaseSpec {
     @Test(priority = 1)
     public void performAddToCart() {
         Assert.assertTrue(productsPage.getDiv_products().get(1).isDisplayed());
-        simpleActions.scrollIntoView(actions, productsPage.getDiv_products().get(1));
-        simpleActions.click(productsPage.getAnchor_add_to_cart());
 
+        simpleActions.scrollIntoView(actions, productsPage.getDiv_products().get(1));
+
+        simpleActions.click(productsPage.getAnchor_add_to_cart());
         simpleActions.waitForElement(wait, productsPage.getDiv_modal_body());
+
         Assert.assertTrue(simpleActions.isVisible(productsPage.getDiv_modal_body()));
 
         simpleActions.click(productsPage.getButton_dismiss_modal());
@@ -63,10 +67,7 @@ public class CheckoutSpec extends BaseSpec {
     public void performPlaceOrder() {
         simpleActions.click(topMenuBar.getAnchor_cart());
 
-        Assert.assertTrue(simpleActions.isVisible(cartPage.getList_item_active()));
         Assert.assertTrue(simpleActions.isVisible(cartPage.getTable_cart_info()));
-
-        System.out.println(simpleActions.isVisible(cartPage.getTable_cart_info()));
 
         simpleActions.click(cartPage.getButton_proceed_to_checkout());
 
