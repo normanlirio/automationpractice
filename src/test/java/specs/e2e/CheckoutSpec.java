@@ -64,29 +64,25 @@ public class CheckoutSpec extends BaseSpec {
         simpleActions.click(topMenuBar.getAnchor_cart());
 
         Assert.assertTrue(simpleActions.isVisible(cartPage.getList_item_active()));
+        Assert.assertTrue(simpleActions.isVisible(cartPage.getTable_cart_info()));
 
-        if (!cartPage.getSpan_empty_cart().isDisplayed()) {
-            Assert.assertTrue(simpleActions.isVisible(cartPage.getTable_cart_info()));
+        System.out.println(simpleActions.isVisible(cartPage.getTable_cart_info()));
 
-            System.out.println(simpleActions.isVisible(cartPage.getTable_cart_info()));
+        simpleActions.click(cartPage.getButton_proceed_to_checkout());
 
-            simpleActions.click(cartPage.getButton_proceed_to_checkout());
+        Assert.assertTrue(simpleActions.isVisible(checkoutPage.getHeader_page_subheading()));
+        simpleActions.type(checkoutPage.getTextarea_comment(), TestData.TEXT_COMMENT);
 
-            Assert.assertTrue(simpleActions.isVisible(checkoutPage.getHeader_page_subheading()));
-            simpleActions.type(checkoutPage.getTextarea_comment(), TestData.TEXT_COMMENT);
+        //Click Place order button to trigger ads
+        simpleActions.click(checkoutPage.getAnchor_place_order());
 
-            //Click Place order button to trigger ads
-            simpleActions.click(checkoutPage.getAnchor_place_order());
-
-            hideAllAds();
+        hideAllAds();
 
 
-            //Click button to proceed to next step
-            simpleActions.click(checkoutPage.getAnchor_place_order());
+        //Click button to proceed to next step
+        simpleActions.click(checkoutPage.getAnchor_place_order());
 
-            Assert.assertTrue(simpleActions.isVisible(paymentPage.getButton_payment_button()));
-
-        } else cartPage.visit(TestData.HOME_URL);
+        Assert.assertTrue(simpleActions.isVisible(paymentPage.getButton_payment_button()));
 
     }
 

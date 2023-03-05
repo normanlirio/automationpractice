@@ -13,7 +13,6 @@ public class CartPage extends BasePage {
 
     private final By button_proceed_to_checkout= By.linkText("Proceed To Checkout");
     private final By list_item_active = By.cssSelector("li[class='active']");
-    private final By span_empty_cart = By.id("empty_cart");
     private final By table_cart_info = By.id("cart_info_table");
 
     public WebElement getButton_proceed_to_checkout() {
@@ -25,9 +24,6 @@ public class CartPage extends BasePage {
     }
     public WebElement getList_item_active() {
         return findElement(list_item_active);
-    }
-    public WebElement getSpan_empty_cart() {
-        return findElement(span_empty_cart);
     }
     public WebElement getTable_cart_info() {
         return findElement(table_cart_info);
