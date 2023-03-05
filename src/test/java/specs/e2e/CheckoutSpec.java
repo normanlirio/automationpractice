@@ -35,8 +35,9 @@ public class CheckoutSpec extends BaseSpec {
 
     @Test(priority = 0)
     public void performLogin()  {
-        loginPage.visit(TestData.LOGIN_URL);
 
+        loginPage.visit(TestData.LOGIN_URL);
+        System.out.println(webDriver.getCurrentUrl());
         wait.until(ExpectedConditions.elementToBeClickable(loginPage.getButton_login_submit()));
 
         Assert.assertEquals(simpleActions.isVisible(loginPage.getForm_login()), true);
