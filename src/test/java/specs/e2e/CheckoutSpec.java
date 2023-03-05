@@ -42,6 +42,7 @@ public class CheckoutSpec extends BaseSpec {
         simpleActions.type(loginPage.getInput_login_email(), System.getProperty("testUsername"));
         simpleActions.type(loginPage.getInput_login_password(),  System.getProperty("testPassword"));
         simpleActions.click(loginPage.getButton_login_submit());
+
         Assert.assertTrue(simpleActions.isVisible(topMenuBar.getAnchor_logout()));
 
     }
@@ -61,10 +62,14 @@ public class CheckoutSpec extends BaseSpec {
     @Test(priority = 2)
     public void performPlaceOrder() {
         simpleActions.click(topMenuBar.getAnchor_cart());
+
         Assert.assertTrue(simpleActions.isVisible(cartPage.getList_item_active()));
 
         if (!cartPage.getSpan_empty_cart().isDisplayed()) {
             Assert.assertTrue(simpleActions.isVisible(cartPage.getTable_cart_info()));
+
+            System.out.println(simpleActions.isVisible(cartPage.getTable_cart_info()));
+
             simpleActions.click(cartPage.getButton_proceed_to_checkout());
 
             Assert.assertTrue(simpleActions.isVisible(checkoutPage.getHeader_page_subheading()));
@@ -75,7 +80,8 @@ public class CheckoutSpec extends BaseSpec {
 
             hideAllAds();
 
-            //Click button to to proceed to next step
+
+            //Click button to proceed to next step
             simpleActions.click(checkoutPage.getAnchor_place_order());
 
             Assert.assertTrue(simpleActions.isVisible(paymentPage.getButton_payment_button()));
@@ -86,7 +92,6 @@ public class CheckoutSpec extends BaseSpec {
 
     @Test(priority = 3)
     public void performPayment() {
-        System.out.println("performPayment");
         Assert.assertTrue(simpleActions.isVisible(paymentPage.getButton_payment_button()));
 
         simpleActions.type(paymentPage.getInput_name_of_card(), TestData.NAME_ON_CARD);

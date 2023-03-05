@@ -44,7 +44,7 @@ public class BaseSpec {
 
     private WebDriverWait initializeWait() {
         try {
-            wait = new WebDriverWait(webDriver, Duration.ofMillis(2000L));
+            wait = new WebDriverWait(webDriver, Duration.ofMillis(3000L));
         } catch (NullPointerException e) {
             e.getLocalizedMessage();
             System.out.println("WebDriver not initialized: " + e.getLocalizedMessage());
