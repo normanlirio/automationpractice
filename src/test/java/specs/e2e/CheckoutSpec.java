@@ -56,6 +56,8 @@ public class CheckoutSpec extends BaseSpec {
 
         simpleActions.scrollIntoView(actions, productsPage.getDiv_products().get(1));
 
+        wait.until(ExpectedConditions.elementToBeClickable( productsPage.getDiv_products().get(1)));
+
         simpleActions.click(productsPage.getAnchor_add_to_cart());
         simpleActions.waitForElement(wait, productsPage.getDiv_modal_body());
 
