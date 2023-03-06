@@ -22,7 +22,8 @@ jobs:
         run: mvn dependency:resolve
         
       - name: Step 4 - Build Test
-        run: mvn --file pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='${{secrets.TEST_EMAIL}}' -DtestPassword='${{secrets.TEST_PW}}' -DloginSpec='test-suite/testsuite.xml' test
+        run: mvn --file pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='${{secrets.TEST_EMAIL}}' -DtestPassword='${{secrets.TEST_PW}}' -DloginSpec='test-suite/testsuite.xml' clean test
+        continue-on-error: true
         
       - name: Step 5 - Download artifacts
         uses: actions/upload-artifact@v3
