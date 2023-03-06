@@ -3,7 +3,7 @@
 <suite name="Automation Practice" verbose="10" configfailurepolicy="continue">
     <test name="End to end tests">
         <classes>
-            <class name="specs.e2e.CheckoutSpec" />
+            <class name="specs.e2e.LoginSpec" />
         </classes>
     </test>
 </suite>
