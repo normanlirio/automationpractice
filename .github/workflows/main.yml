@@ -24,9 +24,9 @@ jobs:
       - name: Step 4 - Build Test
         run: mvn --file pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='${{secrets.TEST_EMAIL}}' -DtestPassword='${{secrets.TEST_PW}}' -DloginSpec='test-suite/testsuite.xml' test
         
-      - name: Step 5 - Download artifactrs
+      - name: Step 5 - Download artifacts
         uses: actions/upload-artifact@v3
         with:
-           name: my-artifact
+           name: upload-screen-recording
            path: captures/video/
       
