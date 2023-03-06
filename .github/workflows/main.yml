@@ -28,5 +28,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
            name: upload-screen-recording
-           path: captures/video/
+           path: ../captures/video/
       
