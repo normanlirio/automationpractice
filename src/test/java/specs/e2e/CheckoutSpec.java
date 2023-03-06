@@ -5,7 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import specs.BaseSpec;
 import util.TestData;
@@ -22,7 +22,7 @@ public class CheckoutSpec extends BaseSpec {
     private ProductsPage productsPage;
     private TopMenuBar topMenuBar;
 
-   @BeforeTest
+   @BeforeClass
     public void initialize() {
         cartPage = new CartPage(webDriver);
         checkoutPage = new CheckoutPage(webDriver);

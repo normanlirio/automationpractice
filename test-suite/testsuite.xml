@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Automation Practice" verbose="10" configfailurepolicy="continue">
-    <test name="End to end tests">
+    <test name="End to end test for Login">
         <classes>
             <class name="specs.e2e.LoginSpec" />
+        </classes>
+    </test>
+    <test name="End to end test for Checkout">
+        <classes>
             <class name="specs.e2e.CheckoutSpec" />
         </classes>
     </test>
