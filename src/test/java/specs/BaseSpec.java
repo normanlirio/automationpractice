@@ -6,23 +6,31 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
-import util.Drivers;
 import util.PropertiesHelper;
+import util.ScreenCaptureTest;
 
+import java.awt.*;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
 public class BaseSpec {
-
-    private Drivers drivers;
 
     public Actions actions;
     public Properties testProperties;
     public WebDriver webDriver;
     public WebDriverWait wait;
     public SimpleActions simpleActions;
+
+    @BeforeSuite
+    public void initializeRecorder() throws IOException, AWTException {
+        ScreenCaptureTest.initScreenCapture();
+        ScreenCaptureTest.startCaptureVideo();
+    }
 
     @BeforeTest
     public void setUp() {
@@ -53,4 +61,9 @@ public class BaseSpec {
 
     @AfterTest
     public void tearDown() { webDriver.close(); }
+
+    @AfterSuite
+    public void stopScreenCapture() throws IOException {
+        ScreenCaptureTest.stopCaptureVideo();
+    }
 }
