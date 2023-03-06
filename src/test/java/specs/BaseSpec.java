@@ -38,11 +38,12 @@ public class BaseSpec {
         } else {
             webDriver = new ChromeDriver();
         }
+        webDriver.manage().window().maximize();
     }
 
     private WebDriverWait initializeWait() {
         try {
-            wait = new WebDriverWait(webDriver, Duration.ofMillis(3000L));
+            wait = new WebDriverWait(webDriver, Duration.ofMillis(5000L));
         } catch (NullPointerException e) {
             e.getLocalizedMessage();
             System.out.println("WebDriver not initialized: " + e.getLocalizedMessage());

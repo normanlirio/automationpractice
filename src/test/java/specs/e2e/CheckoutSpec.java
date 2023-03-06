@@ -54,11 +54,13 @@ public class CheckoutSpec extends BaseSpec {
     public void performAddToCart() {
         Assert.assertTrue(productsPage.getDiv_products().get(1).isDisplayed());
 
-        simpleActions.scrollIntoView(actions, productsPage.getDiv_products().get(1));
+        wait.until(ExpectedConditions.elementToBeClickable(productsPage.getDiv_products().get(1)));
 
-        wait.until(ExpectedConditions.elementToBeClickable( productsPage.getDiv_products().get(1)));
+      //  simpleActions.scrollIntoView(actions, productsPage.getDiv_products().get(1));
 
-        simpleActions.click(productsPage.getAnchor_add_to_cart());
+        actions.moveToElement(productsPage.getAnchor_add_to_cart()).click().build().perform();
+
+      //  simpleActions.click(productsPage.getAnchor_add_to_cart());
         simpleActions.waitForElement(wait, productsPage.getDiv_modal_body());
 
         Assert.assertTrue(simpleActions.isVisible(productsPage.getDiv_modal_body()));
