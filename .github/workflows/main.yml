@@ -28,6 +28,6 @@ jobs:
       - name: Step 5 - Download artifacts
         uses: actions/upload-artifact@v3
         with:
-           name: upload-screen-recording
-           path: ./captures/video/
+           name: upload-captures
+           path: ./captures/
       
