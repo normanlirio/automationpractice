@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import util.PropertiesHelper;
-import util.ScreenCaptureTest;
+import util.CapturesHelper;
 import util.TakeScreenshot;
 
 import java.awt.*;
@@ -27,8 +27,9 @@ public class BaseSpec {
 
     @BeforeSuite
     public void initializeRecorder() throws IOException, AWTException {
-        ScreenCaptureTest.initScreenCapture();
-        ScreenCaptureTest.startCaptureVideo();
+        CapturesHelper.clearDirectories();
+        CapturesHelper.initScreenCapture();
+        CapturesHelper.startCaptureVideo();
     }
 
     @BeforeTest
@@ -63,13 +64,13 @@ public class BaseSpec {
 
     @AfterSuite
     public void stopScreenCapture() throws IOException {
-        ScreenCaptureTest.stopCaptureVideo();
+        CapturesHelper.stopCaptureVideo();
     }
 
     @AfterMethod
     public void takeScreenshot(ITestResult result) throws IOException {
         if(ITestResult.FAILURE == result.getStatus()) {
-            TakeScreenshot.takeScreenshot(webDriver, result.getMethod().getMethodName());
+            CapturesHelper.takeScreenshot(webDriver, result.getMethod().getMethodName());
         }
     }
 }

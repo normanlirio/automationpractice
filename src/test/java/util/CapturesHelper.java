@@ -1,10 +1,14 @@
 package util;
 
 
+import org.apache.commons.io.FileUtils;
 import org.monte.media.Format;
 import org.monte.media.FormatKeys;
 import org.monte.media.math.Rational;
 import org.monte.screenrecorder.ScreenRecorder;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 import java.awt.*;
 import java.io.File;
@@ -13,9 +17,15 @@ import java.io.IOException;
 import static org.monte.media.FormatKeys.*;
 import static org.monte.media.VideoFormatKeys.*;
 
-public class ScreenCaptureTest {
+public class CapturesHelper {
 
     private static ScreenRecorder screenRecorder;
+
+    public static void clearDirectories() throws IOException {
+        FileUtils.cleanDirectory(new File("./captures/images/"));
+        FileUtils.cleanDirectory(new File("./captures/video/"));
+    }
+
     public static void initScreenCapture() throws IOException, AWTException {
         GraphicsConfiguration graphicsConfiguration =
                 GraphicsEnvironment
@@ -66,5 +76,10 @@ public class ScreenCaptureTest {
 
     public static void stopCaptureVideo() throws IOException {
         screenRecorder.stop();
+    }
+
+    public static void takeScreenshot(WebDriver driver, String fileName) throws IOException {
+        File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(screenshot, new File("./captures/images/"+ fileName + ".jpg"));
     }
 }

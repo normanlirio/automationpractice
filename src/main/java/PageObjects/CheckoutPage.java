@@ -15,10 +15,6 @@ public class CheckoutPage extends BasePage {
     private final By header_page_subheading = By.cssSelector("h3[class='page-subheading'");
     private final By textarea_comment = By.cssSelector("textarea[name='message'");
 
-    public WebElement getAd_iframe() {
-        return findElement(ad_iframe);
-    }
-
     public WebElement getBody() {
         return findElement(body);
     }

@@ -84,7 +84,6 @@ public class CheckoutSpec extends BaseSpec {
 
         hideAllAds();
 
-
         //Click button to proceed to next step
         simpleActions.click(checkoutPage.getAnchor_place_order());
 
