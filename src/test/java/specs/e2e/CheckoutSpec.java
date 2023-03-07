@@ -60,12 +60,15 @@ public class CheckoutSpec extends BaseSpec {
 
         actions.moveToElement(productsPage.getAnchor_add_to_cart()).click().build().perform();
 
-
         simpleActions.waitForElement(wait, productsPage.getDiv_modal_body());
 
         Assert.assertTrue(simpleActions.isVisible(productsPage.getDiv_modal_body()));
 
-        simpleActions.click(productsPage.getButton_dismiss_modal());
+        simpleActions.click(productsPage.getAnchor_view_cart());
+
+        wait.until(ExpectedConditions.elementToBeClickable(cartPage.getButton_proceed_to_checkout()));
+
+        Assert.assertTrue(cartPage.getTable_cart_info().isDisplayed());
     }
 
     @Test(priority = 2)

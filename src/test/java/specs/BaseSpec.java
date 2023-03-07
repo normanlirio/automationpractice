@@ -8,8 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import util.PropertiesHelper;
 import util.CapturesHelper;
+import util.PropertiesHelper;
 
 import java.awt.*;
 import java.io.IOException;

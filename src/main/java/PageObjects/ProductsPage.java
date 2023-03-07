@@ -13,7 +13,7 @@ public class ProductsPage extends BasePage {
     }
 
     private final By anchor_add_to_cart = By.linkText("Add to cart");
-    private final By anchor_view_cart = By.cssSelector("a[href='view_cart']");
+    private final By anchor_view_cart = By.linkText("View Cart");
     private final By button_dismiss_modal = By.cssSelector("[data-dismiss='modal']");
     private final By div_modal_body = By.id("cartModal");
     private final By div_products = By.className("col-sm-4");
