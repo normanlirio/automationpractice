@@ -72,7 +72,7 @@ public class CheckoutSpec extends BaseSpec {
     public void performPlaceOrder() {
         simpleActions.click(topMenuBar.getAnchor_cart());
 
-        Assert.assertTrue(!simpleActions.isVisible(cartPage.getTable_cart_info()));
+        Assert.assertTrue(simpleActions.isVisible(cartPage.getTable_cart_info()));
 
         simpleActions.click(cartPage.getButton_proceed_to_checkout());
 
