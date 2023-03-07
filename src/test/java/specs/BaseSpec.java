@@ -59,7 +59,7 @@ public class BaseSpec {
     }
 
     @AfterTest
-    public void tearDown() {webDriver.close();}
+    public void tearDown() { webDriver.close();}
 
     @AfterSuite
     public void stopScreenCapture() throws IOException {
