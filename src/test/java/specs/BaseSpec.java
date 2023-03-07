@@ -10,7 +10,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import util.PropertiesHelper;
 import util.CapturesHelper;
-import util.TakeScreenshot;
 
 import java.awt.*;
 import java.io.IOException;
@@ -27,7 +26,6 @@ public class BaseSpec {
 
     @BeforeSuite
     public void initializeRecorder() throws IOException, AWTException {
-        CapturesHelper.clearDirectories();
         CapturesHelper.initScreenCapture();
         CapturesHelper.startCaptureVideo();
     }

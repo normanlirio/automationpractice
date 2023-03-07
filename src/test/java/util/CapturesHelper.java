@@ -21,11 +21,6 @@ public class CapturesHelper {
 
     private static ScreenRecorder screenRecorder;
 
-    public static void clearDirectories() throws IOException {
-        FileUtils.cleanDirectory(new File("./captures/images/"));
-        FileUtils.cleanDirectory(new File("./captures/video/"));
-    }
-
     public static void initScreenCapture() throws IOException, AWTException {
         GraphicsConfiguration graphicsConfiguration =
                 GraphicsEnvironment
