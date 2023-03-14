@@ -26,7 +26,7 @@ In order to reach the objectives, this website is used for implementation. https
 ## How to use
 1. Clone this repository
 2. Open the project
-3. Open a new terminal inside the IDE you are using
-4.  Run mvn dependency:resolve to install maven dependencies
+3. Open a new terminal and navigate to the project root folder
+4. Run `mvn dependency:resolve` to install maven dependencies
 5. Run this command
-```mvn -f pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='yourusername@username.com' -DtestPassword='yourpassword' -DwebDriver='chrome' -DloginSpec='test-suite/testsuite.xml' clean test```
+```mvn -f pom.xml -DtestEnvVariables=env.dev.properties -DtestUsername=yourusername@username.com -DtestPassword=yourpassword -DwebDriver=chrome -DloginSpec'test-suite/testsuite.xml clean test```
