@@ -23,9 +23,9 @@ jobs:
         
       - name: Step 4 - Build Test
         run: mvn --file pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='${{secrets.TEST_EMAIL}}' -DtestPassword='${{secrets.TEST_PW}}' -DloginSpec='test-suite/testsuite.xml' clean test
-        continue-on-error: true
         
       - name: Step 5 - Download artifacts
+        if: always()
         uses: actions/upload-artifact@v3
         with:
            name: upload-captures
