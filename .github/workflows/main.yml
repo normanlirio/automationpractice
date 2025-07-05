@@ -1,5 +1,4 @@
 name: CI
-
 on:
   push:
     branches: [ main ]
@@ -10,12 +9,13 @@ jobs:
     
     steps:
       - name: Step 1 - Checkout main branch from GitHub
-        uses: actions/download-artifact@v4
+        uses: actions/checkout@v4  # Changed from download-artifact to checkout
         
       - name: Step 2 - Set up JDK 19
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v4  # Updated to v4
         with:
           java-version: '19'
+          distribution: 'temurin'  # Added required distribution
           cache: maven
           
       - name: Step 3 - Install dependencies
@@ -24,10 +24,9 @@ jobs:
       - name: Step 4 - Build Test
         run: mvn --file pom.xml -DtestEnvVariables='env.dev.properties' -DtestUsername='${{secrets.TEST_EMAIL}}' -DtestPassword='${{secrets.TEST_PW}}' -DloginSpec='test-suite/testsuite.xml' clean test
         
-      - name: Step 5 - Download artifacts
+      - name: Step 5 - Upload test artifacts
         if: always()
-        uses: actions/download-artifact@v4
+        uses: actions/upload-artifact@v4  # Changed to upload-artifact
         with:
            name: upload-captures
            path: ./captures/
-      
